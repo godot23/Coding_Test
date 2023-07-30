@@ -1,0 +1,18 @@
+body #quiz{
+    display: block;
+    position: relative;
+    align-items: center;
+}
+
+#answer1, #answer2, #answer3, #answer4{
+    display: flex;
+    height: 30px;
+    width: 200px;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#startGameButton{
+    margin: 30px;
+}
