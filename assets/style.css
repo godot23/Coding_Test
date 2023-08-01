@@ -1,7 +1,16 @@
+/* *{ */
+    /* align-items: center;
+    left: 50%;
+} */
+
 body #quiz{
     display: block;
     position: relative;
     align-items: center;
+}
+
+#question{
+    position: relative;
 }
 
 #answer1, #answer2, #answer3, #answer4{

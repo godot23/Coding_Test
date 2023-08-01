@@ -7,6 +7,7 @@ let questionButton4 = document.querySelector("#answer4");
 let startGame = document.querySelector("#startGameButton");
 let timerTime = document.querySelector("#timerTime");
 let savedScore;
+let initials = "aa";
 
 let timer = 10;
 let currentQuestion = 0;
@@ -18,11 +19,9 @@ else{
     savedScore = 0;
 }
 
-let questions = [{question: "Which programming language is the worst?", answers: ["R", "Python", "Java", "Javascript"], correctAnswer: "Javascript"},
+let questions = 
 
-{question: "Which programming language is the best", answers: ["R", "Java", "Python", "Javascript"], correctAnswer: "R"},
-
-{question: "What command is used to upload a string so that it's data persists even when the browser refreshes?", answers: ["Function", "querySelector", "localStorage", "Remove"], correctAnswer: "localStorage"},
+[{question: "What command is used to upload a string so that it's data persists even when the browser refreshes?", answers: ["Function", "querySelector", "localStorage", "Remove"], correctAnswer: "localStorage"},
 
 {question: "What should you be putting before the first instance of every variable that you wish to be editable later?", answers: ["let", "var", "const", "function"], correctAnswer: "let"},
 
@@ -34,7 +33,7 @@ let questions = [{question: "Which programming language is the worst?", answers:
 
 {question: "How do you clear a timer once it hits zero, so that it doesn't go into negatives?", answers: ["setInterval", "remove", "clearInterval(ID)", "timer === 0"], correctAnswer: "clearInterval(ID)"},
 
-{question: "How do you set text within a non-user editable field?", answers: ["innerText", ""]}]
+{question: "How do you set text within a non-user editable field?", answers: ["innerText", "textContent", "editText", "setInterval"], correctAnswer: "textContent"}];
 
 
 
@@ -51,7 +50,7 @@ function timerStart(){
     let timerId = setInterval(function(){
         timer -= 1;
         timerTime.textContent = timer;
-        if (timer === 0){
+        if (timer <= 0){
             clearInterval(timerId);
             endOfGame();
         }
@@ -73,12 +72,18 @@ function endOfGame(){
     questionButton3.remove();
     questionButton4.remove();
     timerTime.remove();
-    questionText.textContent = "Your final score was " + totalScore;
-    
-    if(totalScore < savedScore){
-        localStorage("High Score", toString(totalScore))
-    }
-    
+
+    // this is returning a interger, it needs to be an array. There is a score already, so an array is not being initialized. this change should have fixed it.
+    let highScores = JSON.parse(window.localStorage.getItem("scoreTable"))|| [];
+
+    let newScore = {
+        score: totalScore, initals: initials,
+    };
+
+    highScores.push(newScore);
+    window.localStorage.setItem("score", JSON.stringify(totalScore));
+    window.localStorage.setItem("initials", initials);
+    window.location.href = "highScores.html";
 }
 
 quizDiv.addEventListener("click", function(event){
@@ -91,7 +96,7 @@ quizDiv.addEventListener("click", function(event){
             }
         else{
             timer -= 10;
-            renderQuestion;
+            renderQuestion();
         }
         console.log(event.target.innerText);
         console.log("correct answer:" + questions[currentQuestion].correctAnswer);
