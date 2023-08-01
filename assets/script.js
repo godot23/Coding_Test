@@ -6,14 +6,35 @@ let questionButton3 = document.querySelector("#answer3");
 let questionButton4 = document.querySelector("#answer4");
 let startGame = document.querySelector("#startGameButton");
 let timerTime = document.querySelector("#timerTime");
+let savedScore;
 
 let timer = 10;
 let currentQuestion = 0;
 let totalScore = 0;
-let savedScore = parseInt(localStorage.getItem("High Score"));
+if(localStorage != undefined){
+    savedScore = parseInt(localStorage.getItem("High Score"));
+}
+else{
+    savedScore = 0;
+}
 
 let questions = [{question: "Which programming language is the worst?", answers: ["R", "Python", "Java", "Javascript"], correctAnswer: "Javascript"},
-{question: "Which programming language is the best", answers: ["R", "Java", "Python", "Javascript"], correctAnswer: "R"}]
+
+{question: "Which programming language is the best", answers: ["R", "Java", "Python", "Javascript"], correctAnswer: "R"},
+
+{question: "What command is used to upload a string so that it's data persists even when the browser refreshes?", answers: ["Function", "querySelector", "localStorage", "Remove"], correctAnswer: "localStorage"},
+
+{question: "What should you be putting before the first instance of every variable that you wish to be editable later?", answers: ["let", "var", "const", "function"], correctAnswer: "let"},
+
+{question: "Which command allows you to remove an element from the screen?", answers:["textContent", "localStorage", "remove", "delete"], correctAnswer: "remove"},
+
+{question: "What should come at the end of a series of if statements if you want some code to execute by default?", answers: ["else", "else if", "for", "switch"], correctAnswer: "else"},
+
+{question: "What should you use to allow users to interact with your website through clicking, pressing buttons, or some other kind of input?", answers: ["setInterval", "addEventListener", "event", "matches"], correctAnswer: "addEventListener"},
+
+{question: "How do you clear a timer once it hits zero, so that it doesn't go into negatives?", answers: ["setInterval", "remove", "clearInterval(ID)", "timer === 0"], correctAnswer: "clearInterval(ID)"},
+
+{question: "How do you set text within a non-user editable field?", answers: ["innerText", ""]}]
 
 
 
@@ -54,7 +75,10 @@ function endOfGame(){
     timerTime.remove();
     questionText.textContent = "Your final score was " + totalScore;
     
-    )
+    if(totalScore < savedScore){
+        localStorage("High Score", toString(totalScore))
+    }
+    
 }
 
 quizDiv.addEventListener("click", function(event){
