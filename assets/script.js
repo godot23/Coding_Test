@@ -10,6 +10,7 @@ let timerTime = document.querySelector("#timerTime");
 let timer = 10;
 let currentQuestion = 0;
 let totalScore = 0;
+let savedScore = parseInt(localStorage.getItem("High Score"));
 
 let questions = [{question: "Which programming language is the worst?", answers: ["R", "Python", "Java", "Javascript"], correctAnswer: "Javascript"},
 {question: "Which programming language is the best", answers: ["R", "Java", "Python", "Javascript"], correctAnswer: "R"}]
@@ -46,13 +47,14 @@ questionButton4.textContent = questions[currentQuestion].answers[3];
 }
 
 function endOfGame(){
-    questionText.remove();
     questionButton1.remove();
     questionButton2.remove();
     questionButton3.remove();
     questionButton4.remove();
-    questionText.remove();
     timerTime.remove();
+    questionText.textContent = "Your final score was " + totalScore;
+    
+    )
 }
 
 quizDiv.addEventListener("click", function(event){
