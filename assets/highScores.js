@@ -1,17 +1,14 @@
 let finalScore = localStorage.getItem("score");
 let initials = localStorage.getItem("initials");
-let scoreTable = JSON.parse(window.localStorage.getItem("scoreTable")) || [];
+let scoreTableEl = document.querySelector("#highScoreTable");
+let scoreTable = JSON.parse(window.localStorage.getItem("scoreTable")) || []
 
 score();
 
 function score(){
-    console.log(finalScore);
-    console.log(initials);
-    scoreTable.push(finalScore, initials);
+    scoreTableEl.append(scoreTable);
+    scoreTableEl.append(initials);
+    scoreTableEl.append(finalScore);
 
-
-    
-    window.localStorage.setItem("scoreTable", JSON.stringify(scoreTable));
+    localStorage.setItem("scoreTable", initials, finalScore);
 }
-
-

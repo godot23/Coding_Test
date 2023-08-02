@@ -9,7 +9,7 @@ let timerTime = document.querySelector("#timerTime");
 let savedScore;
 let initials = "aa";
 
-let timer = 10;
+let timer = 30;
 let currentQuestion = 0;
 let totalScore = 0;
 if(localStorage != undefined){
@@ -58,12 +58,16 @@ function timerStart(){
 }
 
 function renderQuestion(){
-
-questionText.textContent = questions[currentQuestion].question;
-questionButton1.textContent = questions[currentQuestion].answers[0];
-questionButton2.textContent = questions[currentQuestion].answers[1];
-questionButton3.textContent = questions[currentQuestion].answers[2];
-questionButton4.textContent = questions[currentQuestion].answers[3];
+    if(currentQuestion >= questions.length){
+        endOfGame()
+    }
+    else{
+    questionText.textContent = questions[currentQuestion].question;
+    questionButton1.textContent = questions[currentQuestion].answers[0];
+    questionButton2.textContent = questions[currentQuestion].answers[1];
+    questionButton3.textContent = questions[currentQuestion].answers[2];
+    questionButton4.textContent = questions[currentQuestion].answers[3];
+    }
 }
 
 function endOfGame(){
@@ -73,14 +77,10 @@ function endOfGame(){
     questionButton4.remove();
     timerTime.remove();
 
-    // this is returning a interger, it needs to be an array. There is a score already, so an array is not being initialized. this change should have fixed it.
-    let highScores = JSON.parse(window.localStorage.getItem("scoreTable"))|| [];
-
     let newScore = {
         score: totalScore, initals: initials,
     };
 
-    highScores.push(newScore);
     window.localStorage.setItem("score", JSON.stringify(totalScore));
     window.localStorage.setItem("initials", initials);
     window.location.href = "highScores.html";

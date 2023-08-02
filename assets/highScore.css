@@ -1,7 +1,17 @@
 button{
-    position: absolute;
-    left: 47%;
+    position: relative;
+    left: 46%;
     top: 60%;
     height: 50px;
     width: 200px;
+    font-size: 1.6em;
+    text-decoration: none;
+}
+
+#highScoreTable{
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    margin-top: 15%;
+    font-size: 1.6em;
 }
