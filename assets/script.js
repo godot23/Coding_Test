@@ -81,7 +81,7 @@ function endOfGame(){
         score: totalScore, initals: initials,
     };
 
-    window.localStorage.setItem("score", JSON.stringify(totalScore));
+    window.localStorage.setItem("score", JSON.stringify(newScore));
     window.localStorage.setItem("initials", initials);
     window.location.href = "highScores.html";
 }
